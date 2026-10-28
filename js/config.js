@@ -134,7 +134,7 @@ function createDefaultSiteContent(){
     aboutQuote: '"Bir tıraş, sadece görünüşü değil, günü de değiştirir."',
     aboutParagraphs: [
       "{{shopName}}, {{locationName}}'de erkeklere premium berberlik hizmeti sunar. Amacımız yalnızca saç ve sakal kesmek değil; her müşterimize kendini değerli hissettiği, huzurla vakit geçirebileceği bir mekan sunmak.",
-      'Geleneksel berberlik ustalığını modern tekniklerle birleştiriyor, her detaya özen gösteriyoruz. Deneyimli ekibimiz, güler yüzümüz ve titizliğimizle sizi ağırlamaktan mutluluk duyarız.'
+      'Fransa’nın Marsilya şehrinden Türkiye’ye uzanan profesyonel kuaförlük deneyimiyle, modern erkek saç tasarımını ve Avrupa tarzını İstanbul’a taşıyorum. Uluslararası deneyimim, estetik bakış açım ve kişiye özel çalışma anlayışımla her müşterime kaliteli ve profesyonel bir hizmet sunuyorum.'
     ],
     services: SERVICES.map(service => ({ ...service, features: [...service.features] })),
     barbers: BARBERS.map(barber => ({ ...barber, names: { ...barber.names } })),

@@ -36,7 +36,8 @@ const EN_SERVICES = {
 
 const REFRESHMENTS = [
   { icon: '🍵', names: { tr: 'Çay', en: 'Tea', fr: 'Thé' } },
-  { icon: '☕', names: { tr: 'Türk Kahvesi', en: 'Turkish Coffee', fr: 'Café turc' } },
+  { icon: '☕', names: { tr: 'Fransız Kahvesi', en: 'French Coffee', fr: 'Café français' } },
+  { icon: '☕', names: { tr: 'Espresso Kahve', en: 'Espresso Coffee', fr: 'Café espresso' } },
   { icon: '🥤', names: { tr: 'Sade Soda', en: 'Plain Mineral Water', fr: 'Eau minérale nature' } },
   { icon: '🍓', names: { tr: 'Meyveli Soda', en: 'Fruit-flavored Mineral Water', fr: 'Eau minérale aromatisée' } },
   { icon: '☕', names: { tr: '3’ü 1 Arada Kahve', en: '3-in-1 Coffee', fr: 'Café 3-en-1' } },
