@@ -237,9 +237,8 @@ const FR_BOOKING_SERVICE_NAMES = {
 function shopDisplayText(value){
   if(typeof value !== 'string') return value;
   return value
-    .replace(/erkek kuaf\u00f6r\u00fc/gi, 'Barber Shop')
-    .replace(/kuaf\u00f6rl\u00fck/gi, 'barbering')
-    .replace(/kuaf\u00f6r/gi, 'shop');
+    .replace(/erkek kuaf\u00f6r\u00fc/gi, 'Erkek Kuaförü')
+    .replace(/kuaf\u00f6r/gi, 'kuaför');
 }
 
 function localizeCmsText(value){
