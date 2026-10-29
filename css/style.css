@@ -44,6 +44,10 @@ html[data-theme="light"]{
 
 *{ box-sizing: border-box; }
 html,body{ margin:0; padding:0; }
+body.site-loading{ visibility:hidden; }
+body.site-ready{ visibility:visible; }
+
+body{ margin:0; padding:0; }
 html{ scroll-behavior: smooth; }
 body{
   background: var(--bg);

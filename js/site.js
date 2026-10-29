@@ -36,13 +36,12 @@ const EN_SERVICES = {
 
 const REFRESHMENTS = [
   { icon: '🍵', names: { tr: 'Çay', en: 'Tea', fr: 'Thé' } },
-  { icon: '☕', names: { tr: 'Fransız Kahvesi', en: 'French Coffee', fr: 'Café français' } },
+  { icon: '🥤', names: { tr: 'Oralet Çeşitleri', en: 'Oralet Varieties', fr: 'Variétés d’oralet' } },
   { icon: '☕', names: { tr: 'Espresso Kahve', en: 'Espresso Coffee', fr: 'Café espresso' } },
   { icon: '🥤', names: { tr: 'Sade Soda', en: 'Plain Mineral Water', fr: 'Eau minérale nature' } },
   { icon: '🍓', names: { tr: 'Meyveli Soda', en: 'Fruit-flavored Mineral Water', fr: 'Eau minérale aromatisée' } },
   { icon: '☕', names: { tr: '3’ü 1 Arada Kahve', en: '3-in-1 Coffee', fr: 'Café 3-en-1' } },
   { icon: '💧', names: { tr: 'Su', en: 'Water', fr: 'Eau' } },
-  { icon: '🥤', names: { tr: 'Cola', en: 'Cola', fr: 'Cola' } }
 ];
 
 const FR_UI = {
@@ -125,6 +124,91 @@ const FR_UI = {
   adminLogin: 'Connexion administrateur'
 };
 
+const EN_UI = {
+  premiumService: 'Premium Service',
+  googleRating: 'Google Rating',
+  reviewCount: 'Reviews',
+  googleReviews: 'Google reviews',
+  craftsmanship: 'Crafted with expertise',
+  personalTouch: 'A personal touch in every detail',
+  premiumProducts: 'Premium products',
+  trustedBrands: 'Trusted professional brands',
+  easyBooking: 'Easy booking',
+  chooseTime: 'Choose a time that suits you',
+  whyUs: 'Why Choose Us?',
+  barberExperience: '{location}: A Distinctive Barbering Experience',
+  personalizedCare: 'With our experienced team and quality products, we provide a personalized care experience for every client.',
+  experiencedTeam: 'Experienced Team',
+  expertService: 'Careful and precise service from skilled barbers.',
+  hygienicEnvironment: 'Hygienic Environment',
+  hygieneStandards: 'Sterilized equipment and rigorous cleanliness standards.',
+  qualityProducts: 'Quality Products',
+  professionalBrands: 'We use only reliable professional brand products.',
+  longHours: 'Extended Hours',
+  hoursDescription: 'We serve you until 11:00 PM on weekdays and until midnight on weekends.',
+  whatWeOffer: 'What We Offer',
+  ourServices: 'Our Premium Services',
+  servicesDescription: 'Every service is delivered carefully by our experienced professionals using quality products.',
+  transparentPricing: 'Transparent Pricing',
+  priceList: 'Price List',
+  pricingDescription: 'A premium care experience with clear, competitive prices without compromising quality.',
+  priceNote: 'Prices are starting prices and may vary depending on the service. Call us for current prices.',
+  aboutUs: 'About Us',
+  createBooking: 'Create Booking',
+  whatClientsSay: 'What Our Clients Say',
+  verifiedRating: 'Our Verified Google Rating',
+  reviewsOnGoogle: 'based on Google reviews',
+  seeGoogleReviews: 'See All Reviews on Google',
+  bookingForm: 'Booking Form',
+  enterDetails: 'Enter Your Details',
+  bookingDescription: 'Create your appointment in a few steps and leave the rest to us.',
+  fullName: 'Full Name',
+  namePlaceholder: 'Your full name',
+  phone: 'Phone',
+  service: 'Service',
+  barber: 'Barber',
+  date: 'Date',
+  time: 'Time',
+  confirmBooking: 'Confirm Booking',
+  contact: 'Contact',
+  getInTouch: 'Get in Touch',
+  contactDescription: 'Call us with any questions or get directions from the map.',
+  address: 'Address',
+  directions: 'Get Directions →',
+  phoneWhatsapp: 'Phone / WhatsApp',
+  messageWhatsapp: 'Message us on WhatsApp →',
+  openingHours: 'Opening Hours',
+  footerDescription: '{location}: your premium men’s barber shop.',
+  haircut: 'Haircut',
+  beardTrim: 'Beard Trim',
+  hairBeard: 'Hair + Beard',
+  skinCare: 'Skin Care',
+  rightsReserved: 'All rights reserved.',
+  bookNow: 'Book Now',
+  bookingNameRequired: 'Please enter your full name and phone number.',
+  bookingInvalidSelection: 'Please choose a valid service, date and time.',
+  bookingInvalidPhone: 'Please enter a valid phone number.',
+  saving: 'Saving…',
+  bookingSaved: 'Your appointment has been confirmed!',
+  bookingSavedSuffix: 'We look forward to seeing you.',
+  bookingFailed: 'The appointment could not be saved:',
+  booked: 'BOOKED',
+  past: 'PASSED',
+  bookingConfirmation: 'Confirm Booking',
+  languageSelection: 'Language selection',
+  themeToggle: 'Change theme',
+  highlights: 'Highlights',
+  barberChair: 'Barber chair',
+  shopExterior: 'Gentlemen’s Barber exterior',
+  map: 'Map',
+  adminLogin: 'Admin Login'
+};
+
+const EN_MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
 const FR_CMS_TEXT = {
   'Personel saç+sakal': 'Coupe + barbe personnalisées',
   'Personel saç kesimi': 'Coupe personnalisée',
@@ -172,8 +256,9 @@ const FR_MONTHS = [
 ];
 
 function localizedUiText(key, turkishText){
-  if(currentLanguage !== 'fr') return turkishText;
-  return FR_UI[key] || turkishText;
+  if(currentLanguage === 'fr') return FR_UI[key] || turkishText;
+  if(currentLanguage === 'en') return EN_UI[key] || turkishText;
+  return turkishText;
 }
 
 function localizedService(service){
@@ -215,19 +300,25 @@ function applyLanguage(){
     if(!heroTitle.dataset.originalHtml) heroTitle.dataset.originalHtml = heroTitle.innerHTML;
     heroTitle.innerHTML = currentLanguage === 'fr'
       ? `<span class="js-shop-name">${escapeHtml(shopDisplayText(siteContent.shopName))}</span> pour affirmer <span id="hero-highlight">votre style</span>`
-      : heroTitle.dataset.originalHtml;
+      : currentLanguage === 'en'
+        ? `<span class="js-shop-name">${escapeHtml(shopDisplayText(siteContent.shopName))}</span> to elevate <span id="hero-highlight">your style</span>`
+        : heroTitle.dataset.originalHtml;
   }
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     if(!el.dataset.i18nTr) el.dataset.i18nTr = el.innerHTML;
     const key = el.dataset.i18n;
-    const text = currentLanguage === 'fr' ? (FR_UI[key] || el.dataset.i18nTr) : el.dataset.i18nTr;
+    const text = currentLanguage === 'fr' ? (FR_UI[key] || el.dataset.i18nTr)
+      : currentLanguage === 'en' ? (EN_UI[key] || el.dataset.i18nTr)
+      : el.dataset.i18nTr;
     el.innerHTML = text.replaceAll('{location}', `<span class="js-location">${escapeHtml(siteContent.locationName)}</span>`);
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.dataset.i18nPlaceholder;
     if(!el.dataset.i18nPlaceholderTr) el.dataset.i18nPlaceholderTr = el.placeholder;
-    el.placeholder = currentLanguage === 'fr' ? (FR_UI[key] || el.dataset.i18nPlaceholderTr) : el.dataset.i18nPlaceholderTr;
+    el.placeholder = currentLanguage === 'fr' ? (FR_UI[key] || el.dataset.i18nPlaceholderTr)
+      : currentLanguage === 'en' ? (EN_UI[key] || el.dataset.i18nPlaceholderTr)
+      : el.dataset.i18nPlaceholderTr;
   });
   ['alt', 'title', 'aria-label'].forEach(attribute => {
     const dataKey = `i18n${attribute.split('-').map(part => part[0].toUpperCase() + part.slice(1)).join('')}`;
@@ -235,11 +326,13 @@ function applyLanguage(){
       const key = el.dataset[dataKey];
       const originalKey = `i18n${attribute.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())}Tr`;
       if(!el.dataset[originalKey]) el.dataset[originalKey] = el.getAttribute(attribute) || '';
-      el.setAttribute(attribute, currentLanguage === 'fr' ? (FR_UI[key] || el.dataset[originalKey]) : el.dataset[originalKey]);
+      el.setAttribute(attribute, currentLanguage === 'fr' ? (FR_UI[key] || el.dataset[originalKey])
+        : currentLanguage === 'en' ? (EN_UI[key] || el.dataset[originalKey])
+        : el.dataset[originalKey]);
     });
   });
   document.querySelectorAll('.js-service-stat').forEach(el => {
-    el.textContent = currentLanguage === 'fr' ? FR_UI.premiumService : 'Premium Hizmet';
+    el.textContent = currentLanguage === 'fr' ? FR_UI.premiumService : currentLanguage === 'en' ? EN_UI.premiumService : 'Premium Hizmet';
   });
   
   const nav1 = document.querySelector('.nav-links li:nth-child(1) a'); if(nav1) nav1.textContent = french ? 'Services' : english ? 'Services' : 'Hizmetler';
@@ -268,6 +361,10 @@ function applyLanguage(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
+  const revealSite = () => {
+    document.body.classList.remove('site-loading');
+    document.body.classList.add('site-ready');
+  };
   renderShopInfo();
   const languageSelect = document.getElementById('language-select');
   if(languageSelect){
@@ -300,7 +397,9 @@ document.addEventListener('DOMContentLoaded', function(){
       updateTimeSlots();
       applySiteContent();
     }
-  }).catch(err => console.warn('Site içerikleri Supabase üzerinden yüklenemedi:', err));
+  }).catch(err => {
+    console.warn('Site içerikleri Supabase üzerinden yüklenemedi:', err);
+  }).finally(revealSite);
 
   const fDay = document.getElementById('f-day');
   if(fDay) fDay.addEventListener('change', () => { updateTimeSlots(); fetchAppointmentsForSlots(); });
@@ -328,12 +427,16 @@ function renderShopInfo(){
   const content = siteContent || createDefaultSiteContent();
   document.title = currentLanguage === 'fr'
     ? `${shopDisplayText(content.shopName)} — Salon de coiffure pour hommes à ${content.locationName}`
-    : `${shopDisplayText(content.shopName)} — ${content.locationName}`;
+    : currentLanguage === 'en'
+      ? `${shopDisplayText(content.shopName)} — Men’s Barber Shop in ${content.locationName}`
+      : `${shopDisplayText(content.shopName)} — ${content.locationName}`;
   const description = document.querySelector('meta[name="description"]');
   if(description){
     description.content = currentLanguage === 'fr'
       ? `Salon de coiffure pour hommes à ${content.locationName} : coupes, barbe et soins. Prenez rendez-vous en ligne.`
-      : `Gentlemen's Barber shop — ${content.locationName}'de saç, sakal ve cilt bakımı. Online randevu alın.`;
+      : currentLanguage === 'en'
+        ? `Gentlemen's Barber shop — Haircuts, beard trims and skin care in ${content.locationName}. Book online.`
+        : `Gentlemen's Barber shop — ${content.locationName}'de saç, sakal ve cilt bakımı. Online randevu alın.`;
   }
   document.querySelectorAll('.js-shop-name').forEach(el => el.textContent = shopDisplayText(content.shopName));
   document.querySelectorAll('.js-shop-short').forEach(el => el.textContent = shopDisplayText(content.shopShort));
@@ -349,7 +452,11 @@ function renderShopInfo(){
   const mapFrame = document.getElementById('map-frame');
   if(mapFrame) mapFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(content.address)}&z=16&output=embed`;
 
-  const whatsappText = currentLanguage === 'fr' ? 'Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous.' : 'Merhaba%2C%20randevu%20almak%20istiyorum.';
+  const whatsappText = currentLanguage === 'fr'
+    ? 'Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous.'
+    : currentLanguage === 'en'
+      ? 'Hello%2C%20I%20would%20like%20to%20book%20an%20appointment.'
+      : 'Merhaba%2C%20randevu%20almak%20istiyorum.';
   document.querySelectorAll('.js-whatsapp-link').forEach(el => { el.href = `https://wa.me/${content.whatsappNumber}?text=${whatsappText}`; });
   document.querySelectorAll('.js-instagram-link').forEach(el => { el.href = content.instagramUrl; });
   document.querySelectorAll('.js-maps-link').forEach(el => { el.href = content.mapsLink; });
@@ -370,31 +477,51 @@ function applySiteContent(){
         ? 'Le salon de coiffure pour hommes incontournable de Sultanbeyli'
         : content.heroEyebrow
     ))
+    : currentLanguage === 'en' && (
+      content.heroEyebrow === createDefaultSiteContent().heroEyebrow ||
+      content.heroEyebrow === "Sultanbeyli'nin Tercih Edilen Erkek shop'u"
+    )
+      ? 'Sultanbeyli’s Preferred Men’s Barber Shop'
     : shopDisplayText(content.heroEyebrow);
   const highlight = document.getElementById('hero-highlight');
-  if(highlight) highlight.textContent = currentLanguage === 'fr' && content.heroHighlight === 'tarzınızı' ? 'votre style' : content.heroHighlight;
+  if(highlight) highlight.textContent = currentLanguage === 'fr' && content.heroHighlight === 'tarzınızı'
+    ? 'votre style'
+    : currentLanguage === 'en' && content.heroHighlight === 'tarzınızı'
+      ? 'your style'
+      : content.heroHighlight;
   const lead = document.querySelector('.js-hero-lead');
   if(lead) lead.textContent = currentLanguage === 'fr'
     ? shopDisplayText(content.heroLeadFr || (content.heroLead === createDefaultSiteContent().heroLead
       ? `Le lieu où style, soin et confiance se rencontrent à ${content.locationName}. Profitez d’une expérience de coiffure haut de gamme et prenez rendez-vous dès maintenant.`
       : localizeCmsText(fillPlaceholders(content.heroLead))))
-    : shopDisplayText(fillPlaceholders(content.heroLead));
+    : currentLanguage === 'en' && content.heroLead === createDefaultSiteContent().heroLead
+      ? `The place where style, care and confidence come together in ${content.locationName}. Book your premium barbering experience with expert hands today.`
+      : shopDisplayText(fillPlaceholders(content.heroLead));
   const quote = document.getElementById('about-quote');
   if(quote) quote.textContent = currentLanguage === 'fr' && content.aboutQuote === '"Bir tıraş, sadece görünüşü değil, günü de değiştirir."'
     ? '« Une coupe ne change pas seulement votre apparence, elle illumine aussi votre journée. »'
+    : currentLanguage === 'en' && content.aboutQuote === '"Bir tıraş, sadece görünüşü değil, günü de değiştirir."'
+      ? '"A haircut changes more than your appearance; it can change your whole day."'
     : shopDisplayText(content.aboutQuote);
   const aboutParagraph1 = document.getElementById('about-paragraph-1');
   if(aboutParagraph1) aboutParagraph1.textContent = currentLanguage === 'fr'
     ? shopDisplayText(content.aboutParagraphsFr?.[0] || (content.aboutParagraphs[0] === createDefaultSiteContent().aboutParagraphs[0]
       ? `${content.shopName}, à ${content.locationName}, propose des services de coiffure haut de gamme pour hommes. Nous souhaitons offrir à chacun un lieu où il se sent valorisé et peut profiter d’un moment de détente.`
       : localizeCmsText(fillPlaceholders(content.aboutParagraphs[0]))))
-    : shopDisplayText(fillPlaceholders(content.aboutParagraphs[0]));
+    : currentLanguage === 'en' && content.aboutParagraphs[0] === createDefaultSiteContent().aboutParagraphs[0]
+      ? `${content.shopName} offers premium barbering services for men in ${content.locationName}. Our aim is not only to cut hair and beards, but to provide every client with a place where they feel valued and can enjoy a peaceful moment.`
+      : shopDisplayText(fillPlaceholders(content.aboutParagraphs[0]));
   const aboutParagraph2 = document.getElementById('about-paragraph-2');
   if(aboutParagraph2) aboutParagraph2.textContent = currentLanguage === 'fr'
     ? shopDisplayText(content.aboutParagraphsFr?.[1] || (content.aboutParagraphs[1] === createDefaultSiteContent().aboutParagraphs[1]
       ? 'Nous associons le savoir-faire traditionnel aux techniques modernes et accordons de l’attention à chaque détail. Notre équipe expérimentée sera ravie de vous accueillir.'
       : localizeCmsText(fillPlaceholders(content.aboutParagraphs[1]))))
-    : shopDisplayText(fillPlaceholders(content.aboutParagraphs[1]));
+    : currentLanguage === 'en' && (
+      content.aboutParagraphs[1] === createDefaultSiteContent().aboutParagraphs[1] ||
+      content.aboutParagraphs[1] === 'Geleneksel berberlik ustalığını modern tekniklerle birleştiriyor, her detaya özen gösteriyoruz. Deneyimli ekibimiz, güler yüzümüz ve titizliğimizle sizi ağırlamaktan mutluluk duyarız.'
+    )
+      ? 'With professional experience stretching from Marseille, France, to Turkey, I bring modern men’s hair design and European style to Istanbul. With international experience, an aesthetic perspective and a personalized approach, I provide every client with high-quality, professional service.'
+      : shopDisplayText(fillPlaceholders(content.aboutParagraphs[1]));
 }
 
 function renderWorkingHours(){
@@ -406,6 +533,12 @@ function renderWorkingHours(){
         { day: 'Samedi', hours: '09 h – minuit' },
         { day: 'Dimanche', hours: 'Fermé' }
       ]
+    : currentLanguage === 'en'
+      ? [
+          { day: 'Monday – Friday', hours: '09:00 – 22:00' },
+          { day: 'Saturday', hours: '09:00 – midnight' },
+          { day: 'Sunday', hours: 'Closed' }
+        ]
     : WORKING_HOURS;
   table.innerHTML = rows.map(row => `<tr><td>${row.day}</td><td>${row.hours}</td></tr>`).join('');
 }
@@ -473,7 +606,7 @@ function populateFormSelects(){
 
   const fMonth = document.getElementById('f-month');
   if(fMonth){
-    const months = currentLanguage === 'fr' ? FR_MONTHS : MONTHS;
+    const months = currentLanguage === 'fr' ? FR_MONTHS : currentLanguage === 'en' ? EN_MONTHS : MONTHS;
     fMonth.innerHTML = months.map((m,i) => `<option value="${i+1}"${i + 1 === currentMonth ? ' selected' : ''}>${m}</option>`).join('');
   }
 
@@ -657,10 +790,16 @@ async function handleBookingSubmit(e){
     }
 
     const barberName = getActiveBarbers().find(item => item.id === barberId)?.names?.tr || getActiveBarbers().find(item => item.id === barberId)?.name || 'Berber';
-    const monthName = currentLanguage === 'fr' ? FR_MONTHS[month - 1] : MONTHS[month - 1];
+    const monthName = currentLanguage === 'fr'
+      ? FR_MONTHS[month - 1]
+      : currentLanguage === 'en'
+        ? EN_MONTHS[month - 1]
+        : MONTHS[month - 1];
     msgBox.innerHTML = currentLanguage === 'fr'
       ? `<div class="msg ok">${FR_UI.bookingSaved} ${day} ${monthName} ${year} à ${startTime} — ${barberName}. ${FR_UI.bookingSavedSuffix}</div>`
-      : `<div class="msg ok">Randevunuz alındı! ${day} ${monthName} ${year}, saat ${startTime} — ${barberName} ile sizi bekliyoruz.</div>`;
+      : currentLanguage === 'en'
+        ? `<div class="msg ok">${EN_UI.bookingSaved} ${monthName} ${day}, ${year} at ${startTime} — ${barberName}. ${EN_UI.bookingSavedSuffix}</div>`
+        : `<div class="msg ok">Randevunuz alındı! ${day} ${monthName} ${year}, saat ${startTime} — ${barberName} ile sizi bekliyoruz.</div>`;
     
     e.target.reset();
     populateFormSelects();
